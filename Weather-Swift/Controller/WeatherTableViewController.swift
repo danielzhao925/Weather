@@ -114,7 +114,7 @@ extension WeatherTableViewController:CLLocationManagerDelegate{
         let currentLocation = locations.last!
         print("Current location: \(currentLocation)")
         
-        let locationStr = "\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.latitude)"
+        let locationStr = "\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)"
         
         self.updateWeather(locationStr: locationStr);
     }
