@@ -19,14 +19,13 @@ class WeatherTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("\(self.weatherTableHeaderView)")
         self.title = "Weather";
         
         let status  = CLLocationManager.authorizationStatus()
         
         if status == .notDetermined {
-            locationManager.requestAlwaysAuthorization()
-//            return
+            locationManager.requestWhenInUseAuthorization()
         }
         
         if status == .denied || status == .restricted {
@@ -45,21 +44,18 @@ class WeatherTableViewController: UITableViewController {
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
-            //locationManager.startUpdatingHeading()
         }
-
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-    }
-    
-    
-    fileprivate func updateWeather(locationStr:String) {
+    func updateWeather(locationStr:String, finished:(() -> Void)? = nil) {
         
         WebServiceManager.shareWebServiceManager.getWeather(locationStr: locationStr,finished: { (response) in
-            
+                        
             let weatherItem:WeatherItem = WeatherItem(JSON: response)!
 
+            if let timezone:String = weatherItem.timezone {
+                Utilities.sharedInstance.timezone = timezone
+            }
 
             if let condition:Condition = weatherItem.currently ,
                 let forecastArray:[Condition] = weatherItem.hourly
@@ -67,13 +63,14 @@ class WeatherTableViewController: UITableViewController {
                     self.weatherTableHeaderView.condition = condition
                     self.forecastArray = forecastArray
                     self.tableView.reloadData()
+                }
+            
+            if let finished = finished{
+                finished()
             }
             
         })
-
     }
-    
-    
 }
 
 extension WeatherTableViewController {

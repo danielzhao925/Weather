@@ -37,7 +37,7 @@ public func webServiceRequest(
     
     var urlString = baseURLString
     
-    urlString = urlString + url
+    urlString = urlString + url + "?units=si"
     
     urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     

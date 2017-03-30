@@ -13,7 +13,7 @@
         <!--Root View Controller-->
         <scene sceneID="ZYR-vP-tDX">
             <objects>
-                <tableViewController id="ZQr-DX-geU" customClass="WeatherTableViewController" customModule="Weather_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WeatherTableViewController" id="ZQr-DX-geU" customClass="WeatherTableViewController" customModule="Weather_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="109" sectionHeaderHeight="28" sectionFooterHeight="28" id="Pk6-m4-KC1">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
